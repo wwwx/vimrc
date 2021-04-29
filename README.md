@@ -1,4 +1,4 @@
-# vimrc
+**# vimrc
 My custom configuration for vim
 
 
@@ -49,43 +49,5 @@ nmap <leader>p "*p
 nnoremap <S-k> :.m.-2<CR>
 " move onee line down
 nnoremap <S-j> :.m.+1<CR>
-" move selected lines up one line
-xnoremap <C-k> :m-2<CR>gv
-" move selected lines down one line
-xnoremap <C-j> :m'>+<CR>gv
-
-" vundle start ===========
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-" list of plugins must be between  vundle#begin() and vundle#end()
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'Lokaltog/vim-powerline'
-Plugin 'Lokaltog/vim-easymotion'
-" Plugin 'rvim-airline/vim-airline'
-Plugin 'junegunn/vim-easy-align'
-call vundle#end()
-filetype plugin indent on
-" vundle end =============
-
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
-" UI start ================
-let g:solarized_termtrans  = 1        " using termnal background
-let g:solarized_visibility = "high"   " using :set list
-
-" GUI mode use light background, Terminal mode use dark background
-if has('gui_running')
-    set background=light
-else
-    set background=dark
-endif
-
-colorscheme solarized
-" colorscheme elflord
-" UI end =================
 ```
+**
