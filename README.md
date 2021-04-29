@@ -1,4 +1,4 @@
-**# vimrc
+# vimrc
 My custom configuration for vim
 
 
@@ -50,4 +50,4 @@ nnoremap <S-k> :.m.-2<CR>
 " move onee line down
 nnoremap <S-j> :.m.+1<CR>
 ```
-**
+
