@@ -1,8 +1,6 @@
 # vimrc
 My custom configuration for vim
 
-
-
 ```bash
 set nocompatible
 set showmode
@@ -49,5 +47,62 @@ nmap <leader>p "*p
 nnoremap <S-k> :.m.-2<CR>
 " move onee line down
 nnoremap <S-j> :.m.+1<CR>
+" move selected lines up one line
+xnoremap <C-k> :m-2<CR>gv
+" move selected lines down one line
+xnoremap <C-j> :m'>+<CR>gv
+
+" vundle start ===========
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+" list of plugins must be between  vundle#begin() and vundle#end()
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'Lokaltog/vim-easymotion'
+" Plugin 'rvim-airline/vim-airline'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'mattn/emmet-vim'
+Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plugin 'junegunn/fzf.vim'
+call vundle#end()
+filetype plugin indent on
+" vundle end =============
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_ngdoc = 1
+let g:javascript_plugin_flow  = 1
+
+let g:user_emmet_mode = 'inv'
+let g:user_emmet_leader_key = '<C-J>'
+
+" search files at current folder
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>l :Lines<CR>
+nnoremap <leader>bl :BLines<CR>
+nnoremap <leader>h :History<CR>
+
+" UI start ================
+let g:solarized_termtrans  = 1        " using termnal background
+let g:solarized_visibility = "high"   " using :set list
+
+" GUI mode use light background, Terminal mode use dark background
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+endif
+
+colorscheme elflord
+" colorscheme elflord
+" UI end =================
 ```
 
