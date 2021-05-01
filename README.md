@@ -18,19 +18,27 @@ set scrolloff=5
 set incsearch
 set ignorecase
 set wildmenu
+set history=1000
+set autoread
+set nobackup
+set nowb
+set noswapfile
+set paste
+set mouse-=a
+
 
 filetype on
 filetype indent on
 filetype plugin on
 
-syntax on
+syntax  on
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
-
 let mapleader=";"
-nmap <leader>q :q<CR>
-nmap <leader>Q :qa!<CR>
-nmap <leader>s :wq<CR>
-nmap <leader>w :w<CR>
+
+nmap <leader>q  :q<CR>
+nmap <leader>Q  :qa!<CR>
+nmap <leader>s  :wq<CR>
+nmap <leader>w  :w<CR>
 nmap <leader>WQ :wa<CR>:q<CR>
 
 nnoremap <leader>lw <C-W>l
@@ -38,10 +46,13 @@ nnoremap <leader>hw <C-W>h
 nnoremap <leader>kw <C-W>k
 nnoremap <leader>jw <C-W>j
 
+" Press F6 to toggle the visibitly of the line numbers
+" nnoremap <F6> :set nonumber!<CR>:set foldcolumn=0<CR>
+
 " copy to clipboard
 vnoremap <leader>y "*y
 " paste from clipboard
-nmap <leader>p "*p
+nmap     <leader>p "*p
 
 " move one line up
 nnoremap <S-k> :.m.-2<CR>
@@ -61,12 +72,14 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'Lokaltog/vim-easymotion'
-" Plugin 'rvim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'mattn/emmet-vim'
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plugin 'junegunn/fzf.vim'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'tpope/vim-commentary'
 call vundle#end()
 filetype plugin indent on
 " vundle end =============
@@ -80,15 +93,15 @@ let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_ngdoc = 1
 let g:javascript_plugin_flow  = 1
 
-let g:user_emmet_mode = 'inv'
+let g:user_emmet_mode       = 'inv'
 let g:user_emmet_leader_key = '<C-J>'
 
 " search files at current folder
-nnoremap <leader>f :Files<CR>
-nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>l :Lines<CR>
+nnoremap <leader>f  :Files<CR>
+nnoremap <leader>b  :Buffers<CR>
+nnoremap <leader>l  :Lines<CR>
 nnoremap <leader>bl :BLines<CR>
-nnoremap <leader>h :History<CR>
+nnoremap <leader>h  :History<CR>
 
 " UI start ================
 let g:solarized_termtrans  = 1        " using termnal background
