@@ -50,8 +50,11 @@ nnoremap <leader>jw <C-W>j
 " nnoremap <F6> :set nonumber!<CR>:set foldcolumn=0<CR>
 
 " copy to clipboard
+
 vnoremap <leader>y "*y
+
 " paste from clipboard
+
 nmap     <leader>p "*p
 
 " move one line up
