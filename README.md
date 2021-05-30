@@ -23,7 +23,6 @@ set autoread
 set nobackup
 set nowb
 set noswapfile
-set paste
 set mouse-=a
 
 
@@ -35,6 +34,7 @@ syntax  on
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
 let mapleader=";"
 
+
 nmap <leader>q  :q<CR>
 nmap <leader>Q  :qa!<CR>
 nmap <leader>s  :wq<CR>
@@ -44,7 +44,8 @@ nmap <leader>WQ :wa<CR>:q<CR>
 nnoremap <leader>lw <C-W>l
 nnoremap <leader>hw <C-W>h
 nnoremap <leader>kw <C-W>k
-nnoremap <leader>jw <C-W>j
+
+inoremap jj <Esc>
 
 " Press F6 to toggle the visibitly of the line numbers
 " nnoremap <F6> :set nonumber!<CR>:set foldcolumn=0<CR>
@@ -64,24 +65,17 @@ xnoremap <C-k> :m-2<CR>gv
 xnoremap <C-j> :m'>+<CR>gv
 
 " vundle start ===========
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-" list of plugins must be between  vundle#begin() and vundle#end()
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'Lokaltog/vim-powerline'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'vim-airline/vim-airline'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'mattn/emmet-vim'
-Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plugin 'junegunn/fzf.vim'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'tpope/vim-commentary'
-call vundle#end()
-filetype plugin indent on
+call plug#begin('~/.vim/plugged')
+Plug 'vim-airline/vim-airline'
+Plug 'junegunn/vim-easy-align'
+Plug 'sheerun/vim-polyglot'
+Plug 'mattn/emmet-vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-commentary'
+Plug 'preservim/nerdtree'
+call plug#end()
 " vundle end =============
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -96,7 +90,9 @@ let g:javascript_plugin_flow  = 1
 let g:user_emmet_mode       = 'inv'
 let g:user_emmet_leader_key = '<C-J>'
 
-" search files at current folder
+map <C-t> :NERDTreeToggle<CR>
+
+" search files at urrent folder
 nnoremap <leader>f  :Files<CR>
 nnoremap <leader>b  :Buffers<CR>
 nnoremap <leader>l  :Lines<CR>
