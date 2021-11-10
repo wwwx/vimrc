@@ -31,9 +31,11 @@ filetype indent on
 filetype plugin on
 
 syntax  on
-autocmd BufWritePost $MYVIMRC source $MYVIMRC
-let mapleader=";"
+" Automatically source vimrc on save.
+autocmd! BufWritePost $MYVIMRC source $MYVIMRC | echom "Reloaded $NVIMRC"
+" au InsertLeave *.sh,*.py,*.html,*.css,*.scss,*.json,*.js,*.ts,*.vue,*.md
 
+let mapleader = ';'
 
 nmap <leader>q  :q<CR>
 nmap <leader>Q  :qa!<CR>
@@ -48,7 +50,7 @@ nnoremap <leader>kw <C-W>k
 inoremap jj <Esc>
 
 " Press F6 to toggle the visibitly of the line numbers
-" nnoremap <F6> :set nonumber!<CR>:set foldcolumn=0<CR>
+nnoremap <F6> :set nonumber!<CR>:set foldcolumn=0<CR>
 
 " copy to clipboard
 vnoremap <leader>y "*y
@@ -64,7 +66,7 @@ xnoremap <C-k> :m-2<CR>gv
 " move selected lines down one line
 xnoremap <C-j> :m'>+<CR>gv
 
-" vundle start ===========
+" Plug start ===========
 call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'junegunn/vim-easy-align'
@@ -75,8 +77,15 @@ Plug 'junegunn/fzf.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
 Plug 'preservim/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'preservim/tagbar'
+Plug 'rakr/vim-one'
+Plug 'morhetz/gruvbox'
+Plug 'neoclide/coc.nvim'
+Plug 'luochen1990/rainbow'
+Plug 'mhinz/vim-startify'
 call plug#end()
-" vundle end =============
+" Plug end =============
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -90,7 +99,16 @@ let g:javascript_plugin_flow  = 1
 let g:user_emmet_mode       = 'inv'
 let g:user_emmet_leader_key = '<C-J>'
 
-map <C-t> :NERDTreeToggle<CR>
+" let g:airline_theme = 'one'
+
+let g:rainbow_active = 1
+
+
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
 
 " search files at urrent folder
 nnoremap <leader>f  :Files<CR>
@@ -102,16 +120,30 @@ nnoremap <leader>h  :History<CR>
 " UI start ================
 let g:solarized_termtrans  = 1        " using termnal background
 let g:solarized_visibility = "high"   " using :set list
-
+ 
 " GUI mode use light background, Terminal mode use dark background
 if has('gui_running')
     set background=light
 else
     set background=dark
 endif
-
-colorscheme elflord
-" colorscheme elflord
+  
+colorscheme gruvbox
 " UI end =================
+
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" Use <Ctrl-F> to format documents with prettier
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+noremap <C-F> :Prettier<CR>
+
 ```
 
