@@ -2,6 +2,11 @@
 My custom configuration for vim
 
 ```bash
+syntax  on
+filetype on
+filetype indent on
+filetype plugin on
+
 set nocompatible
 set showmode
 set showcmd
@@ -23,39 +28,42 @@ set autoread
 set nobackup
 set nowb
 set noswapfile
-set mouse-=a
+set bg=dark
 
 
-filetype on
-filetype indent on
-filetype plugin on
-
-syntax  on
 " Automatically source vimrc on save.
-autocmd! BufWritePost $MYVIMRC source $MYVIMRC | echom "Reloaded $NVIMRC"
+" autocmd! BufWritePost $MYVIMRC source $MYVIMRC | echom "Reloaded $NVIMRC"
 " au InsertLeave *.sh,*.py,*.html,*.css,*.scss,*.json,*.js,*.ts,*.vue,*.md
 
-let mapleader = ';'
+let mapleader = " "
+noremap ; :
 
-nmap <leader>q  :q<CR>
-nmap <leader>Q  :qa!<CR>
-nmap <leader>s  :wq<CR>
-nmap <leader>w  :w<CR>
-nmap <leader>WQ :wa<CR>:q<CR>
+map <C-j> 5j
+map <C-k> 5k
 
-nnoremap <leader>lw <C-W>l
-nnoremap <leader>hw <C-W>h
-nnoremap <leader>kw <C-W>k
+noremap Q  :q<CR>
+noremap R :source $MYVIMRC<CR>
+noremap W  :w<CR>
 
+
+" ESC
 inoremap jj <Esc>
 
-" Press F6 to toggle the visibitly of the line numbers
-nnoremap <F6> :set nonumber!<CR>:set foldcolumn=0<CR>
+" open vimrc file while editing
+noremap <leader>vi :e $HOME/.vimrc<CR>
 
-" copy to clipboard
-vnoremap <leader>y "*y
-" paste from clipboard
-nmap     <leader>p "*p
+" Press F6 to toggle the visibitly of the line numbers
+nnoremap <F6> :set nonumber!<CR>:set norelativenumber<CR>
+
+" Press the space twice to jump to the next '<++>' and edit it
+map <leader><leader> <ESC>/<++><CR>:nohlsearch<CR>c4l
+
+" Switch the focus between the beginning and end of the line
+noremap <C-h> ^
+noremap <C-l> $
+
+noremap  <expr>0 col('.') == 1 ? '^' : '0'
+
 
 " move one line up
 nnoremap <S-k> :.m.-2<CR>
@@ -64,16 +72,14 @@ nnoremap <S-j> :.m.+1<CR>
 " move selected lines up one line
 xnoremap <C-k> :m-2<CR>gv
 " move selected lines down one line
-xnoremap <C-j> :m'>+<CR>gv
+xnoremap <C-j> :m'>+<!-- <CR> -->gv
 
-" Plug start ===========
+
+" Plug start
 call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/vim-easy-align'
-Plug 'sheerun/vim-polyglot'
-Plug 'mattn/emmet-vim'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
 Plug 'preservim/nerdtree'
@@ -84,8 +90,26 @@ Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim'
 Plug 'luochen1990/rainbow'
 Plug 'mhinz/vim-startify'
+Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim'
+" Plug 'junegunn/fzf'
+" Plug 'junegunn/fzf.vim'
 call plug#end()
-" Plug end =============
+" Plug end
+
+let g:airline_theme="simple"
+
+" NerdTree
+nnoremap <leader>n :NERDTreeFocud<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-o> :NERDTreeFind<CR>
+
+noremap <leader>w <C-w>w
+noremap <leader>h <C-w>h
+noremap <leader>j <C-w>j
+noremap <leader>k <C-w>k
+noremap <leader>l <C-w>l
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -104,37 +128,34 @@ let g:user_emmet_leader_key = '<C-J>'
 let g:rainbow_active = 1
 
 
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
+
 
 
 " search files at urrent folder
-nnoremap <leader>f  :Files<CR>
-nnoremap <leader>b  :Buffers<CR>
-nnoremap <leader>l  :Lines<CR>
-nnoremap <leader>bl :BLines<CR>
-nnoremap <leader>h  :History<CR>
+" nnoremap <leader>f  :Files<CR>
+" nnoremap <leader>b  :Buffers<CR>
+" nnoremap <leader>l  :Lines<CR>
+" nnoremap <leader>bl :BLines<CR>
+" nnoremap <leader>h  :History<CR>
 
 " UI start ================
 let g:solarized_termtrans  = 1        " using termnal background
 let g:solarized_visibility = "high"   " using :set list
- 
+
 " GUI mode use light background, Terminal mode use dark background
 if has('gui_running')
     set background=light
 else
     set background=dark
 endif
-  
+
 colorscheme gruvbox
 " UI end =================
 
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -145,5 +166,26 @@ let g:syntastic_check_on_wq = 0
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 noremap <C-F> :Prettier<CR>
 
+" Press `F5` to run python
+noremap <F5> <ESC>:w<CR>:execute "!python %"<CR>
+
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+
+" Opening ranger instead of netrw when you open a directory
+let g:NERDTreeHijackNetrw = 1 " add this line if you use NERDTree
 ```
 
