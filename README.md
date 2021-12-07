@@ -28,7 +28,9 @@ set autoread
 set nobackup
 set nowb
 set noswapfile
-set bg=dark
+set splitbelow
+set updatetime=100
+set clipboard=unnamedplus
 
 
 " Automatically source vimrc on save.
@@ -45,6 +47,7 @@ noremap Q  :q<CR>
 noremap R :source $MYVIMRC<CR>
 noremap W  :w<CR>
 
+noremap y "*y
 
 " ESC
 inoremap jj <Esc>
@@ -54,6 +57,9 @@ noremap <leader>vi :e $HOME/.vimrc<CR>
 
 " Press F6 to toggle the visibitly of the line numbers
 nnoremap <F6> :set nonumber!<CR>:set norelativenumber<CR>
+
+" Press F5 to run python
+noremap <F5> <ESC>:w<CR>:execute "!python %"<CR>
 
 " Press the space twice to jump to the next '<++>' and edit it
 map <leader><leader> <ESC>/<++><CR>:nohlsearch<CR>c4l
@@ -75,7 +81,9 @@ xnoremap <C-k> :m-2<CR>gv
 xnoremap <C-j> :m'>+<!-- <CR> -->gv
 
 
-" Plug start
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""" Plug start
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -83,50 +91,63 @@ Plug 'junegunn/vim-easy-align'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
 Plug 'preservim/nerdtree'
-Plug 'scrooloose/syntastic'
-Plug 'preservim/tagbar'
-Plug 'rakr/vim-one'
 Plug 'morhetz/gruvbox'
-Plug 'neoclide/coc.nvim'
 Plug 'luochen1990/rainbow'
 Plug 'mhinz/vim-startify'
-Plug 'francoiscabrol/ranger.vim'
-Plug 'rbgrouleff/bclose.vim'
+Plug 'neoclide/coc.nvim'
+" Plug 'preservim/tagbar'
+" Plug 'scrooloose/syntastic'
 " Plug 'junegunn/fzf'
 " Plug 'junegunn/fzf.vim'
 call plug#end()
-" Plug end
 
-let g:airline_theme="simple"
 
-" NerdTree
+" AIRLINE THEME
+"
+let g:airline_theme="badwolf"
+
+" RAINBOW
+"
+let g:rainbow_active=1 " set to 0 if you want to enable it later via: RainbowToggle
+
+" GUI mode use light background, Terminal mode use dark background
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+endif
+
+" color scheme: gruvbox, one (vim-one)
+colorscheme gruvbox
+
+
+" NERDTREE
+"
+" Open
 nnoremap <leader>n :NERDTreeFocud<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-o> :NERDTreeFind<CR>
 
+" Switch item
 noremap <leader>w <C-w>w
 noremap <leader>h <C-w>h
 noremap <leader>j <C-w>j
 noremap <leader>k <C-w>k
 noremap <leader>l <C-w>l
 
+" Opening ranger instead of netrw when you open a directory
+let g:NERDTreeHijackNetrw = 1 " add this line if you use NERDTree
+
+
+
+
+" EASYALIGN
+"
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-
-let g:javascript_plugin_jsdoc = 1
-let g:javascript_plugin_ngdoc = 1
-let g:javascript_plugin_flow  = 1
-
-let g:user_emmet_mode       = 'inv'
-let g:user_emmet_leader_key = '<C-J>'
-
-" let g:airline_theme = 'one'
-
-let g:rainbow_active = 1
-
 
 
 
@@ -138,36 +159,14 @@ let g:rainbow_active = 1
 " nnoremap <leader>bl :BLines<CR>
 " nnoremap <leader>h  :History<CR>
 
-" UI start ================
-let g:solarized_termtrans  = 1        " using termnal background
-let g:solarized_visibility = "high"   " using :set list
-
-" GUI mode use light background, Terminal mode use dark background
-if has('gui_running')
-    set background=light
-else
-    set background=dark
-endif
-
-colorscheme gruvbox
-" UI end =================
 
 
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
+" COC.VIM
+"
 " Use <Ctrl-F> to format documents with prettier
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 noremap <C-F> :Prettier<CR>
 
-" Press `F5` to run python
-noremap <F5> <ESC>:w<CR>:execute "!python %"<CR>
 
 
 " Use tab for trigger completion with characters ahead and navigate.
@@ -184,8 +183,8 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-
-" Opening ranger instead of netrw when you open a directory
-let g:NERDTreeHijackNetrw = 1 " add this line if you use NERDTree
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""" Plug end
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ```
 
