@@ -43,11 +43,16 @@ noremap ; :
 map <C-j> 5j
 map <C-k> 5k
 
-noremap Q  :q<CR>
+noremap Q :q!<CR>
+noremap W :w!<CR>
+noremap E :nohlsearch<CR>
 noremap R :source $MYVIMRC<CR>
-noremap W  :w<CR>
 
 noremap y "*y
+
+map tu :tabe<CR>
+map tj :+tabnext<CR>
+map tk :-tabnext<CR>
 
 " ESC
 inoremap jj <Esc>
@@ -95,6 +100,8 @@ Plug 'morhetz/gruvbox'
 Plug 'luochen1990/rainbow'
 Plug 'mhinz/vim-startify'
 Plug 'neoclide/coc.nvim'
+Plug 'sirver/UltiSnips'
+Plug 'honza/vim-snippets'
 " Plug 'preservim/tagbar'
 " Plug 'scrooloose/syntastic'
 " Plug 'junegunn/fzf'
@@ -159,6 +166,15 @@ nmap ga <Plug>(EasyAlign)
 " nnoremap <leader>bl :BLines<CR>
 " nnoremap <leader>h  :History<CR>
 
+
+" ULTISNIPS
+"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 
 " COC.VIM
