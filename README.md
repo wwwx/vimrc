@@ -128,6 +128,11 @@ imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
+noremap <c-p> :Rg<CR>
+noremap <c-u> :History<CR>
+noremap <c-b> :Buffers<CR>
+noremap <c-y> :History:<CR>
+
 " AIRLINE THEME
 " =============
 let g:airline_theme="badwolf"
