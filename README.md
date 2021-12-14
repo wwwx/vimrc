@@ -41,18 +41,25 @@ let mapleader = " "
 noremap ; :
 
 map <C-j> 5j
+map <C-l> 7l
 map <C-k> 5k
+map <C-h> 7h
 
+vmap K 5k
+vmap J 5j
+
+noremap L $
+noremap H ^
 noremap Q :q!<CR>
 noremap W :w!<CR>
-noremap E :nohlsearch<CR>
 noremap R :source $MYVIMRC<CR>
+noremap <C-n> :nohlsearch<CR>
 
 noremap y "*y
 
-map tu :tabe<CR>
-map tj :+tabnext<CR>
-map tk :-tabnext<CR>
+map fu :tabe<CR>
+map fj :+tabnext<CR>
+map fk :-tabnext<CR>
 
 " ESC
 inoremap jj <Esc>
@@ -69,11 +76,11 @@ noremap <F5> <ESC>:w<CR>:execute "!python %"<CR>
 " Press the space twice to jump to the next '<++>' and edit it
 map <leader><leader> <ESC>/<++><CR>:nohlsearch<CR>c4l
 
-" Switch the focus between the beginning and end of the line
-noremap <C-h> ^
-noremap <C-l> $
 
 noremap  <expr>0 col('.') == 1 ? '^' : '0'
+
+" Underline the title comment
+noremap gtt yyp2lv$r=
 
 
 " move one line up
@@ -102,19 +109,31 @@ Plug 'mhinz/vim-startify'
 Plug 'neoclide/coc.nvim'
 Plug 'sirver/UltiSnips'
 Plug 'honza/vim-snippets'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 " Plug 'preservim/tagbar'
 " Plug 'scrooloose/syntastic'
-" Plug 'junegunn/fzf'
-" Plug 'junegunn/fzf.vim'
 call plug#end()
 
+" FZF
+" ===
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " AIRLINE THEME
-"
+" =============
 let g:airline_theme="badwolf"
 
 " RAINBOW
-"
+" =======
 let g:rainbow_active=1 " set to 0 if you want to enable it later via: RainbowToggle
 
 " GUI mode use light background, Terminal mode use dark background
@@ -129,10 +148,9 @@ colorscheme gruvbox
 
 
 " NERDTREE
-"
+" ========
 " Open
 nnoremap <leader>n :NERDTreeFocud<CR>
-nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-o> :NERDTreeFind<CR>
 
@@ -150,7 +168,7 @@ let g:NERDTreeHijackNetrw = 1 " add this line if you use NERDTree
 
 
 " EASYALIGN
-"
+" =========
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
@@ -168,7 +186,7 @@ nmap ga <Plug>(EasyAlign)
 
 
 " ULTISNIPS
-"
+" =========
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
@@ -177,27 +195,20 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
 
 
+
+
 " COC.VIM
-"
+" =======
 " Use <Ctrl-F> to format documents with prettier
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 noremap <C-F> :Prettier<CR>
 
 
+" Use <Tab> and <S-Tab> to navigate the completion list
+" For coc
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""" Plug end
