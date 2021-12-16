@@ -128,6 +128,7 @@ imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
+" Find in child window
 noremap <c-p> :Rg<CR>
 noremap <c-u> :History<CR>
 noremap <c-b> :Buffers<CR>
@@ -192,7 +193,7 @@ nmap ga <Plug>(EasyAlign)
 
 " ULTISNIPS
 " =========
-let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<c-e>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
