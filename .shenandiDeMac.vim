@@ -1,4 +1,20 @@
-```bash
+
+"  __  ____   ____     _____ __  __ ____   ____ 
+" |  \/  \ \ / /\ \   / /_ _|  \/  |  _ \ / ___|
+" | |\/| |\ V /  \ \ / / | || |\/| | |_) | |    
+" | |  | | | |    \ V /  | || |  | |  _ <| |___ 
+" |_|  |_| |_|     \_/  |___|_|  |_|_| \_\\____|
+"
+" Author: wwwx
+"
+
+if empty(glob($HOME.'/.config/nvim/autoload/plug.vim'))
+    !curl -k -fLo $HOME/.config/nvim/autoload/plug.vim --create-dirs
+				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+                                              
 syntax on " syntax highlighting
 syntax enable
 filetype on
@@ -42,10 +58,9 @@ map sh :set nosplitright<CR>:vsplit<CR>
 map sk :set nosplitbelow<CR>:split<CR>
 map sj :set splitbelow<CR>:split<CR>
 
-" noremap Q  :q!<CR>
+noremap Q  :q!<CR>
 noremap W  :w!<CR>
 noremap R  :w!<CR>:source $MYVIMRC<CR>
-noremap Q :q!<CR>
 
 map H ^
 map L $
@@ -101,11 +116,14 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'mhinz/vim-startify'
 " Plug 'ryanoasis/vim-devicons'
 " Plug 'Yggdroot/indentLine'
-Plug 'neoclide/coc.nvim'
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 
@@ -126,9 +144,12 @@ let g:UltiSnipsEditSplit="vertical"
 
 
 " Commentary
+"
 noremap gcc :Commentary<CR>
 
 
+" EasyAlign
+"
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
@@ -256,7 +277,3 @@ xmap ag <Plug>(coc-git-chunk-outer)
 nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
 
 
-
-
-
-```
