@@ -1,3 +1,4 @@
+
 "  __  ____   ____     _____ __  __ ____   ____
 " |  \/  \ \ / /\ \   / /_ _|  \/  |  _ \ / ___|
 " | |\/| |\ V /  \ \ / / | || |\/| | |_) | |
@@ -7,10 +8,18 @@
 " Author: wwwx
 "
 
+" The origin request url is:
+" https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"
+if empty(glob($HOME.'/.config/nvim/autoload/plug.vim'))
+    !curl -k -fLo $HOME/.config/nvim/autoload/plug.vim --create-dirs
+				\ http://139.224.225.178:8980/plug.vim
+	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+
+
 syntax  on
-filetype on
-filetype indent on
-filetype plugin on
 
 set nocompatible
 set showmode
@@ -37,11 +46,6 @@ set splitbelow
 set updatetime=100
 set clipboard=unnamedplus
 
-
-" Automatically source vimrc on save.
-" autocmd! BufWritePost $MYVIMRC source $MYVIMRC | echom "Reloaded $NVIMRC"
-" au InsertLeave *.sh,*.py,*.html,*.css,*.scss,*.json,*.js,*.ts,*.vue,*.md
-
 let mapleader = " "
 noremap ; :
 
@@ -60,7 +64,9 @@ noremap W :w!<CR>
 noremap R :source $MYVIMRC<CR>
 noremap <C-n> :nohlsearch<CR>
 
-noremap y "*y
+" Indentation
+noremap < <<
+noremap > >>
 
 map fu :tabe<CR>
 map fj :+tabnext<CR>
@@ -81,21 +87,21 @@ noremap <F5> <ESC>:w<CR>:execute "!python %"<CR>
 " Press the space twice to jump to the next '<++>' and edit it
 map <leader><leader> <ESC>/<++><CR>:nohlsearch<CR>c4l
 
+" When opening a file, the cursor automatically navigates to the location you
+" visited last time
+" TODO
+
 
 noremap  <expr>0 col('.') == 1 ? '^' : '0'
 
 " Underline the title comment
 noremap gtt yyp2lv$r=
 
-
 " move one line up
 nnoremap <S-k> :.m.-2<CR>
 " move onee line down
 nnoremap <S-j> :.m.+1<CR>
-" move selected lines up one line
-xnoremap <C-k> :m-2<CR>gv
-" move selected lines down one line
-xnoremap <C-j> :m'>+<!-- <CR> -->gv
+
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -111,7 +117,7 @@ Plug 'preservim/nerdtree'
 Plug 'morhetz/gruvbox'
 Plug 'luochen1990/rainbow'
 Plug 'mhinz/vim-startify'
-Plug 'neoclide/coc.nvim'
+Plug 'neoclide/coc.nvim', { 'branch': 'master', 'do': 'yarn install --frozen-lockfile' }
 Plug 'sirver/UltiSnips'
 Plug 'honza/vim-snippets'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
@@ -141,7 +147,9 @@ noremap <c-y> :History:<CR>
 
 " AIRLINE THEME
 " =============
-let g:airline_theme="badwolf"
+let g:airline_theme="angr"
+let g:airline#extensions#tabline#enabled = 1
+
 
 " RAINBOW
 " =======
@@ -210,6 +218,21 @@ let g:UltiSnipsEditSplit="vertical"
 
 " COC.VIM
 " =======
+
+let g:coc_global_extensions = [
+	    \'coc-tsserver',
+	    \'coc-json',
+	    \'coc-html',
+	    \'coc-css',
+	    \'coc-git',
+	    \'coc-prettier',
+	    \'coc-marketplace',
+	    \'coc-snippets',
+	    \'coc-vimlsp',
+	    \'coc-vetur',
+	    \'coc-emmet']
+
+
 " Use <Ctrl-F> to format documents with prettier
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 noremap <C-F> :Prettier<CR>
