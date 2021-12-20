@@ -1,8 +1,7 @@
-
-"  __  ____   ____     _____ __  __ ____   ____ 
+"  __  ____   ____     _____ __  __ ____   ____
 " |  \/  \ \ / /\ \   / /_ _|  \/  |  _ \ / ___|
-" | |\/| |\ V /  \ \ / / | || |\/| | |_) | |    
-" | |  | | | |    \ V /  | || |  | |  _ <| |___ 
+" | |\/| |\ V /  \ \ / / | || |\/| | |_) | |
+" | |  | | | |    \ V /  | || |  | |  _ <| |___
 " |_|  |_| |_|     \_/  |___|_|  |_|_| \_\\____|
 "
 " Author: wwwx
@@ -14,30 +13,24 @@ if empty(glob($HOME.'/.config/nvim/autoload/plug.vim'))
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-                                              
-syntax on " syntax highlighting
-syntax enable
-filetype on
-filetype plugin on
-filetype indent on
+exec "nohlsearch"
 
+let &t_ut=''
+set t_Co=256
+set autochdir
 set hidden " TextEdit might fail if hidden is not set
-set nocompatible
 set encoding=utf-8
 set number
 set relativenumber
 set showmode
 set showcmd
-set t_Co=256
-set shiftwidth=4
 set cursorline
 set showmatch
 set noswapfile
 set wildmenu
 set wildmode=longest:list,full
 set scrolloff=5
-set bg=dark
-set nowrap
+set wrap
 set autoindent
 set ignorecase
 set smartcase
@@ -45,12 +38,16 @@ set shortmess+=c
 set splitright
 set splitbelow
 set updatetime=100
+
 set expandtab
 set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 
-let mapleader=" " " using <Space> as leader key is too slow compared with semicolon 
+let mapleader=" "
 noremap  ; :
-noremap <C-n> :nohlsearch<CR> 
+noremap = nzz
+noremap - Nzz
 
 " split window
 map sl :set splitright<CR>:vsplit<CR>
@@ -58,20 +55,30 @@ map sh :set nosplitright<CR>:vsplit<CR>
 map sk :set nosplitbelow<CR>:split<CR>
 map sj :set splitbelow<CR>:split<CR>
 
+" split resize
+map <UP> :resize +5<CR>
+map <DOWN> :resize -5<CR>
+map <LEFT> :vertical resize +5<CR>
+map <RIGHT> :vertical resize -5<CR>
+
 noremap Q  :q!<CR>
 noremap W  :w!<CR>
 noremap R  :w!<CR>:source $MYVIMRC<CR>
 
 map H ^
 map L $
+map s <nop>
 map <C-j> 5j
 map <C-k> 5k
 map <C-h> 7h
 map <C-l> 7l
 
 inoremap jj <ESC>
-noremap  <leader>vi :e $HOME/.vimrc<CR>
-noremap  <expr>0 col('.') == 1 ? '^' : '0'
+noremap <LEADER><CR> :nohlsearch<cr>
+noremap <LEADER>vi :e $HOME/.vimrc<CR>
+noremap <expr>0 col('.') == 1 ? '^' : '0'
+nnoremap dy d%
+noremap gtt yyp2lv$r=
 
 " Copy to system clipboard
 noremap y  "*y
@@ -85,16 +92,16 @@ noremap < <<
 noremap > >>
 
 " Tabs action
-map fu :tabe<CR>
-map fj :-tabnext<CR>
-map fk :+tabnext<CR>
-map ff T
+map fn :tabe<CR>
+map fj :+tabnext<CR>
+map fk :-tabnext<CR>
+map ff Tfj
 
 
 " Automatically source vimrc on save.
-autocmd! BufWritePost $MYVIMRC source $MYVIMRC | echom "Reloaded $NVIMRC"
+autocmd! BufWritePost $MYVIMRC source $MYVIMRC
 
-" Press the space twice to jump to the next '<++>' and edit it  
+" Press the space twice to jump to the next '<++>' and edit it
 map <leader><leader> <ESC>/<++><CR>:nohlsearch<CR>c4l
 
 " SWitch the line number and relativenumber
@@ -111,30 +118,40 @@ Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-commentary'
 Plug 'junegunn/vim-easy-align'
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'morhetz/gruvbox'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mhinz/vim-startify'
-" Plug 'ryanoasis/vim-devicons'
-" Plug 'Yggdroot/indentLine'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'dhruvasagar/vim-table-mode'
+" Highlighting other uses of the current word under the cursor
+Plug 'RRethy/vim-illuminate'
+" Navigating
+Plug 'kevinhwang91/rnvimr'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+
 call plug#end()
+
+" Rnvimr
+" ======
+" open the floating ranger
+nnoremap <C-m> :RnvimrToggle<CR>
 
 
 " MARKDOWN PREVIEW
+" ================
 nmap <C-s> <Plug>MarkdownPreview
 nmap <A-s> <Plug>MarkdownPreviewStop
 nmap <C-p> <Plug>MarkdownPreviewToggle
 
 
 " ULTISNIPS
-"
+" =========
 let g:UltiSnipsExpandTrigger="<C-e>"
 let g:UltiSnipsJumpForwardTrigger="<C-b>"
 let g:UltiSnipsJumpBackwardTrigger="<C-z>"
@@ -159,10 +176,9 @@ nmap ga <Plug>(EasyAlign)
 
 " NERDTree
 "
-let NERDTreeMapOpenInTab='<ENTER>'
 
 nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-t>     :NERDTreeToggle<CR>
+nnoremap <C-i>     :NERDTreeToggle<CR>
 nnoremap <C-o>     :NERDTreeFind<CR>
 
 noremap <leader>w <C-w>w
@@ -171,7 +187,20 @@ noremap <leader>j <C-w>j
 noremap <leader>k <C-w>k
 noremap <leader>l <C-w>l
 
-
+let NERDTreeMapOpenInTab='<ENTER>'
+let g:NERDTreeGitStatusShowClean = 1
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ 'Modified'  :'✹',
+                \ 'Staged'    :'✚',
+                \ 'Untracked' :'✭',
+                \ 'Renamed'   :'➜',
+                \ 'Unmerged'  :'═',
+                \ 'Deleted'   :'✖',
+                \ 'Dirty'     :'✗',
+                \ 'Ignored'   :'☒',
+                \ 'Clean'     :'✔︎',
+                \ 'Unknown'   :'?',
+                \ }
 
 " Color scheme
 colorscheme gruvbox
@@ -202,12 +231,12 @@ nnoremap <expr><C-p> Redraw()
 let g:coc_global_extensions = [
 	    \'coc-tsserver',
 	    \'coc-json',
-	    \'coc-html', 
+	    \'coc-html',
 	    \'coc-css',
-	    \'coc-git', 
-	    \'coc-prettier', 
-	    \'coc-marketplace', 
-	    \'coc-vimlsp', 
+	    \'coc-git',
+	    \'coc-prettier',
+	    \'coc-marketplace',
+	    \'coc-vimlsp',
 	    \'coc-vetur',
 	    \'coc-emmet']
 
@@ -275,5 +304,3 @@ omap ag <Plug>(coc-git-chunk-outer)
 xmap ag <Plug>(coc-git-chunk-outer)
 " If you're not using statusline plugin, you can add them to statusline by
 nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
-
-
