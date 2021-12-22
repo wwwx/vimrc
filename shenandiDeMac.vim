@@ -9,7 +9,7 @@
 
 if empty(glob($HOME.'/.config/nvim/autoload/plug.vim'))
     !curl -k -fLo $HOME/.config/nvim/autoload/plug.vim --create-dirs
-				\ http://139.224..225.178:8980/plug.vim
+				\ http://139.224.225.178:8980/plug.vim
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
