@@ -61,9 +61,9 @@ map <DOWN> :resize -5<CR>
 map <LEFT> :vertical resize +5<CR>
 map <RIGHT> :vertical resize -5<CR>
 
-noremap Q  :q!<CR>
-noremap W  :w!<CR>
-noremap R  :w!<CR>:source $MYVIMRC<CR>
+noremap Q  :q<CR>
+noremap W  :w<CR>
+noremap R  :w<CR>:source $MYVIMRC<CR>
 
 map H ^
 map L $
