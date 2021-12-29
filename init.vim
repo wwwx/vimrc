@@ -198,7 +198,7 @@ nmap ga <Plug>(EasyAlign)
 " NERDTree
 " ========
 " nnoremap <leader>n :NERDTreeFocus<CR>
-" nnoremap <C-i>     :NERDTreeToggle<CR>
+nnoremap <C-i>     :NERDTreeToggle<CR>
 nnoremap <C-o>     :NERDTreeFind<CR>
 noremap  <LEADER>w <C-w>w
 
