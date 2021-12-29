@@ -117,7 +117,7 @@ noremap <F5> :set number relativenumber<CR>
 
 
 """""""""""
-"  Plugs  "
+"  Plugins  "
 """""""""""
 
 call plug#begin('~/.config/nvim/plugged')
@@ -135,6 +135,8 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'dhruvasagar/vim-table-mode'
+" Find & replace
+Plug 'brooth/far.vim', { 'on': [ 'F', 'Far', 'Fardo' ] }
 " Highlighting other uses of the current word under the cursor
 Plug 'RRethy/vim-illuminate'
 " Navigating
@@ -152,6 +154,11 @@ noremap <LEADER>h :History<CR>
 noremap <LEADER>l :Lines<CR>
 noremap <LEADER>b :Buffers<CR>
 noremap <LEADER>; :History:<CR>
+
+" Far.vim
+" =======
+noremap <LEADER>/ :Far
+set lazyredraw
 
 " Airline
 " =======
