@@ -39,10 +39,17 @@ set splitright
 set splitbelow
 set updatetime=100
 
+" tab
 set expandtab
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
+
+" fold
+set foldmethod=indent   
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2
 
 let mapleader=" "
 noremap  ; :
@@ -102,7 +109,7 @@ map ff Tfj
 autocmd! BufWritePost $MYVIMRC source $MYVIMRC
 
 " Press the space twice to jump to the next '<++>' and edit it
-map <leader><leader> <ESC>/<++><CR>:nohlsearch<CR>c4l
+map <LEADER><LEADER> <ESC>/<++><CR>:nohlsearch<CR>c4l
 
 " SWitch the line number and relativenumber
 noremap <F6> :set nonumber norelativenumber<CR>
@@ -137,6 +144,15 @@ Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
+" Fzf
+" ===
+noremap <LEADER>r :Rg<CR>
+noremap <LEADER>f :GFiles<CR>
+noremap <LEADER>h :History<CR>
+noremap <LEADER>l :Lines<CR>
+noremap <LEADER>b :Buffers<CR>
+noremap <LEADER>; :History:<CR>
+
 " Airline
 " =======
 let g:airline#extensions#tabline#enabled = 1
@@ -150,12 +166,13 @@ nnoremap <C-m> :RnvimrToggle<CR>
 " MARKDOWN PREVIEW
 " ================
 nmap <C-s> <Plug>MarkdownPreview
-nmap <A-s> <Plug>MarkdownPreviewStop
-nmap <C-p> <Plug>MarkdownPreviewToggle
+" nmap <A-s> <Plug>MarkdownPreviewStop
+" nmap <C-p> <Plug>MarkdownPreviewToggle
 
 
 " ULTISNIPS
 " =========
+let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/Ultisnips/', $HOME.'/.config/nvim/plugged/vim-snippets/UltiSnips/'] 
 let g:UltiSnipsExpandTrigger="<C-e>"
 let g:UltiSnipsJumpForwardTrigger="<C-b>"
 let g:UltiSnipsJumpBackwardTrigger="<C-z>"
@@ -165,12 +182,12 @@ let g:UltiSnipsEditSplit="vertical"
 
 
 " Commentary
-"
+" ==========
 noremap gcc :Commentary<CR>
 
 
 " EasyAlign
-"
+" =========
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
@@ -179,17 +196,11 @@ nmap ga <Plug>(EasyAlign)
 
 
 " NERDTree
-"
-
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-i>     :NERDTreeToggle<CR>
+" ========
+" nnoremap <leader>n :NERDTreeFocus<CR>
+" nnoremap <C-i>     :NERDTreeToggle<CR>
 nnoremap <C-o>     :NERDTreeFind<CR>
-
-noremap <leader>w <C-w>w
-noremap <leader>h <C-w>h
-noremap <leader>j <C-w>j
-noremap <leader>k <C-w>k
-noremap <leader>l <C-w>l
+noremap  <LEADER>w <C-w>w
 
 let NERDTreeMapOpenInTab='<ENTER>'
 let g:NERDTreeGitStatusShowClean = 1
@@ -212,7 +223,6 @@ colorscheme gruvbox
 
 
 " Use <Tab> and <S-Tab> to navigate the completion list
-" For coc
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
@@ -267,13 +277,14 @@ nmap <silent> gr <Plug>(coc-references)
 
 
 " Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+" Example: `<LEADER>aap` for current paragraph
+xmap <LEADER>a  <Plug>(coc-codeaction-selected)
+nmap <LEADER>a  <Plug>(coc-codeaction-selected)
 
 
 
 " Mappings for CoCList
+" ====================
 " Show all diagnostics.
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
@@ -292,6 +303,7 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 
 
 " Mappings for CoCGit
+" ===================
 " navigate chunks of current buffer
 nmap [g <Plug>(coc-git-prevchunk)
 nmap ]g <Plug>(coc-git-nextchunk)

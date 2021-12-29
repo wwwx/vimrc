@@ -1,0 +1,15 @@
+snippet head "Hexo post header" b
+---
+title: ${1:title}
+date: `!v strftime("%Y-%m-%d %H:%M:%S")`
+tags:
+- ${4}
+---
+
+${0}
+endsnippet
+
+
+snippet kbd "Keyboard"
+<kbd>${1:key}</kbd>
+endsnippet
