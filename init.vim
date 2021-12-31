@@ -135,6 +135,8 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'itchyny/calendar.vim'
+Plug 'kshenoy/vim-signature'
 " Find & replace
 Plug 'brooth/far.vim', { 'on': [ 'F', 'Far', 'Fardo' ] }
 " Highlighting other uses of the current word under the cursor
@@ -227,6 +229,11 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 
 " Color scheme
 colorscheme gruvbox
+
+" Calendar.vim
+" ============
+noremap cc :Calendar<CR>
+noremap cl :Calendar -view=clock<CR>
 
 
 " Use <Tab> and <S-Tab> to navigate the completion list
@@ -328,3 +335,4 @@ omap ag <Plug>(coc-git-chunk-outer)
 xmap ag <Plug>(coc-git-chunk-outer)
 " If you're not using statusline plugin, you can add them to statusline by
 nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
+
