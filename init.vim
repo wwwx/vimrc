@@ -232,8 +232,8 @@ colorscheme gruvbox
 
 " Calendar.vim
 " ============
-noremap cc :Calendar<CR>
-noremap cl :Calendar -view=clock<CR>
+noremap cl :Calendar<CR>
+noremap ck :Calendar -view=clock<CR>
 
 
 " Use <Tab> and <S-Tab> to navigate the completion list
@@ -335,4 +335,7 @@ omap ag <Plug>(coc-git-chunk-outer)
 xmap ag <Plug>(coc-git-chunk-outer)
 " If you're not using statusline plugin, you can add them to statusline by
 nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
+" undo the current chunk
+nmap gu :CocCommand git.chunkUndo<CR>
 
+nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
