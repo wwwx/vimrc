@@ -47,14 +47,17 @@ set softtabstop=4
 
 " fold
 set foldmethod=indent   
-set foldnestmax=10
-set nofoldenable
-set foldlevel=2
+set foldenable
+set foldlevel=99
 
+" leader key
 let mapleader=" "
 noremap  ; :
 noremap = nzz
 noremap - Nzz
+
+" folding
+noremap <LEADER>o za
 
 " split window
 map sl :set splitright<CR>:vsplit<CR>
@@ -306,7 +309,7 @@ nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
 " Show commands.
 nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
 nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
