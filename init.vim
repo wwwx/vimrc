@@ -140,6 +140,8 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'itchyny/calendar.vim'
 Plug 'kshenoy/vim-signature'
+" Auto rename HTML tag
+Plug 'AndrewRadev/tagalong.vim'
 " Find & replace
 Plug 'brooth/far.vim', { 'on': [ 'F', 'Far', 'Fardo' ] }
 " Highlighting other uses of the current word under the cursor
