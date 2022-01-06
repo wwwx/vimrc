@@ -45,6 +45,12 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 
+" leader key
+let mapleader=" "
+noremap  ; :
+noremap = nzz
+noremap - Nzz
+
 " fold
 set foldmethod=indent   
 set foldenable
@@ -53,11 +59,6 @@ set foldlevel=99
 " folding
 noremap <LEADER>o za
 
-" leader key
-let mapleader=" "
-noremap  ; :
-noremap = nzz
-noremap - Nzz
 
 " split bar styling
 set fillchars+=vert:\|
@@ -143,6 +144,8 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'itchyny/calendar.vim'
 Plug 'kshenoy/vim-signature'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
 " Auto rename HTML tag
 Plug 'AndrewRadev/tagalong.vim'
 " Find & replace
@@ -155,6 +158,10 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 call plug#end()
+
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_ngdoc = 1
+let g:javascript_plugin_flow = 1
 
 " Fzf
 " ===
