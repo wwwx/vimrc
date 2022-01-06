@@ -50,14 +50,17 @@ set foldmethod=indent
 set foldenable
 set foldlevel=99
 
+" folding
+noremap <LEADER>o za
+
 " leader key
 let mapleader=" "
 noremap  ; :
 noremap = nzz
 noremap - Nzz
 
-" folding
-noremap <LEADER>o za
+" split bar styling
+set fillchars+=vert:\|
 
 " split window
 map sl :set splitright<CR>:vsplit<CR>
@@ -343,4 +346,3 @@ nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
 " undo the current chunk
 nmap gu :CocCommand git.chunkUndo<CR>
 
-nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
