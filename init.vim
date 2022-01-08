@@ -13,6 +13,14 @@ if empty(glob($HOME.'/.config/nvim/autoload/plug.vim'))
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+
+" customize vim plugin
+" source $HOME/.config/nvim/code/comment.vim
+set rtp+=$HOME/.config/nvim/code/comment
+set rtp+=$HOME/.config/nvim/code/hello
+noremap ghh :Ghh<CR>j
+
+
 exec "nohlsearch"
 
 let &t_ut=''
@@ -144,6 +152,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'itchyny/calendar.vim'
 Plug 'kshenoy/vim-signature'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 " Auto rename HTML tag
@@ -165,6 +174,13 @@ let g:javascript_plugin_flow = 1
 
 " Fzf
 " ===
+" <C-j> cursor up option
+" <C-k> cursor down option
+" <CR>  open in current window
+" <C-x> open in a vertically split window
+" <C-v> open in a horizontally split window
+" <C-t> open in a new tab
+" <C-c> close fzf
 noremap <LEADER>r :Rg<CR>
 noremap <LEADER>f :GFiles<CR>
 noremap <LEADER>h :History<CR>
