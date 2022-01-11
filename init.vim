@@ -9,15 +9,14 @@
 
 if empty(glob($HOME.'/.config/nvim/autoload/plug.vim'))
     !curl -k -fLo $HOME/.config/nvim/autoload/plug.vim --create-dirs
-				\ http://139.224.225.178:8980/plug.vim
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    \ http://139.224.225.178:8980/plug.vim
+autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 
 " customize vim plugin
 " source $HOME/.config/nvim/code/comment.vim
 set rtp+=$HOME/.config/nvim/code/comment
-set rtp+=$HOME/.config/nvim/code/hello
 noremap ghh :CommentHtml<CR>j
 noremap gjj :CommentReact<CR>j
 
@@ -61,7 +60,7 @@ noremap = nzz
 noremap - Nzz
 
 " fold
-set foldmethod=indent   
+set foldmethod=indent
 set foldenable
 set foldlevel=99
 
@@ -133,53 +132,83 @@ noremap <F6> :set nonumber norelativenumber<CR>
 noremap <F5> :set number relativenumber<CR>
 
 
+" Change the current line positon: top(zt), middle(zz), bottom(zb)
+fun! Redraw()
+  let l = winline()
+  let cmd = l * 2 <= winheight(0) + 1 ? l <= (&so + 1) ? 'zb' : 'zt' : 'zz'
+  return cmd
+endf
+
+nnoremap <expr><C-p> Redraw()
+
 """""""""""
 "  Plugins  "
 """""""""""
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'vim-airline/vim-airline'
-Plug 'tpope/vim-commentary'
-Plug 'junegunn/vim-easy-align'
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'morhetz/gruvbox'
-Plug 'jiangmiao/auto-pairs'
-Plug 'mhinz/vim-startify'
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'ryanoasis/vim-devicons'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-Plug 'dhruvasagar/vim-table-mode'
-Plug 'itchyny/calendar.vim'
-Plug 'kshenoy/vim-signature'
-Plug 'luochen1990/rainbow'
-Plug 'editorconfig/editorconfig-vim'
+
+" Basic
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
-" Auto rename HTML tag
-Plug 'AndrewRadev/tagalong.vim'
+Plug 'tpope/vim-commentary'
+Plug 'junegunn/vim-easy-align'
+Plug 'morhetz/gruvbox'
+Plug 'jiangmiao/auto-pairs'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'RRethy/vim-illuminate' " Highlighting other uses of the current word under the cursor
+Plug 'AndrewRadev/tagalong.vim' " Auto rename HTML tag
+" Plug 'kshenoy/vim-signature'
+
+" Markdown
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'dhruvasagar/vim-table-mode'
+
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
+" File tree
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
+
+
+" Status line
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+" Plug 'theniceboy/eleline.vim'
+
 " Find & replace
 Plug 'brooth/far.vim', { 'on': [ 'F', 'Far', 'Fardo' ] }
-" Highlighting other uses of the current word under the cursor
-Plug 'RRethy/vim-illuminate'
+
 " Navigating
 Plug 'kevinhwang91/rnvimr'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+" Others
+Plug 'itchyny/calendar.vim'
+Plug 'mhinz/vim-startify'
+Plug 'luochen1990/rainbow'
+
 call plug#end()
+
+" Color scheme
+colorscheme gruvbox
 
 
 " Rainbow
+" =======
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 
-" Vim-javascript
+
+" Javascript
 " ==============
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_ngdoc = 1
 let g:javascript_plugin_flow = 1
+
 
 " Fzf
 " ===
@@ -197,14 +226,18 @@ noremap <LEADER>l :Lines<CR>
 noremap <LEADER>b :Buffers<CR>
 noremap <LEADER>; :History:<CR>
 
+
 " Far.vim
 " =======
 noremap <LEADER>/ :Far
 set lazyredraw
 
+
 " Airline
 " =======
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme = 'bubblegum'
+
 
 " Rnvimr
 " ======
@@ -212,16 +245,16 @@ let g:airline#extensions#tabline#enabled = 1
 nnoremap <C-m> :RnvimrToggle<CR>
 
 
-" MARKDOWN PREVIEW
+" Markdown
 " ================
 nmap <C-s> <Plug>MarkdownPreview
 " nmap <A-s> <Plug>MarkdownPreviewStop
 " nmap <C-p> <Plug>MarkdownPreviewToggle
 
 
-" ULTISNIPS
+" Ultisnips
 " =========
-let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/Ultisnips/', $HOME.'/.config/nvim/plugged/vim-snippets/UltiSnips/'] 
+let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/Ultisnips/', $HOME.'/.config/nvim/plugged/vim-snippets/UltiSnips/']
 let g:UltiSnipsExpandTrigger="<C-e>"
 let g:UltiSnipsJumpForwardTrigger="<C-b>"
 let g:UltiSnipsJumpBackwardTrigger="<C-z>"
@@ -243,17 +276,8 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 
-
 " NERDTree
 " ========
-" nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-i>     :NERDTreeToggle<CR>
-nnoremap <C-o>     :NERDTreeFind<CR>
-noremap  <LEADER>w <C-w>w
-
-let NERDTreeMapOpenInTab='<ENTER>'
-let g:NERDTreeGitStatusShowClean = 1
-let g:NERDTreeShowHidden = 1
 let g:NERDTreeGitStatusIndicatorMapCustom = {
                 \ 'Modified'  :'✹',
                 \ 'Staged'    :'✚',
@@ -266,62 +290,49 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
                 \ 'Clean'     :'✔︎',
                 \ 'Unknown'   :'?',
                 \ }
+let NERDTreeMapOpenInTab='<ENTER>'
+let g:NERDTreeGitStatusShowClean = 1
+let g:NERDTreeShowHidden = 1
 
-" Color scheme
-colorscheme gruvbox
+" nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-i>     :NERDTreeToggle<CR>
+nnoremap <C-o>     :NERDTreeFind<CR>
+noremap  <LEADER>w <C-w>w
 
-" Calendar.vim
-" ============
-noremap cl :Calendar<CR>
-noremap ck :Calendar -view=clock<CR>
 
+" Coc.vim
+" =======
+let g:coc_global_extensions = [
+                \'coc-tsserver',
+                \'coc-json',
+                \'coc-html',
+                \'coc-css',
+                \'coc-git',
+                \'coc-prettier',
+                \'coc-marketplace',
+                \'coc-vimlsp',
+                \'coc-vetur',
+                \'coc-emmet']
 
 " Use <Tab> and <S-Tab> to navigate the completion list
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-
 " Use <Ctrl-F> to format documents with prettier
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 noremap <C-F> :Prettier<CR>
 
-
-
-" Change the current line positon: top(zt), middle(zz), bottom(zb)
-fun! Redraw()
-  let l = winline()
-  let cmd = l * 2 <= winheight(0) + 1 ? l <= (&so + 1) ? 'zb' : 'zt' : 'zz'
-  return cmd
-endf
-
-nnoremap <expr><C-p> Redraw()
-
-
-let g:coc_global_extensions = [
-	    \'coc-tsserver',
-	    \'coc-json',
-	    \'coc-html',
-	    \'coc-css',
-	    \'coc-git',
-	    \'coc-prettier',
-	    \'coc-marketplace',
-	    \'coc-vimlsp',
-	    \'coc-vetur',
-	    \'coc-emmet']
-
-
 " Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
+" if has('nvim')
+"   inoremap <silent><expr> <c-space> coc#refresh()
+" else
+"   inoremap <silent><expr> <c-@> coc#refresh()
+" endif
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -329,52 +340,68 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-
 " Applying codeAction to the selected region.
 " Example: `<LEADER>aap` for current paragraph
 xmap <LEADER>a  <Plug>(coc-codeaction-selected)
 nmap <LEADER>a  <Plug>(coc-codeaction-selected)
 
 
-
 " Mappings for CoCList
-" ====================
+
 " Show all diagnostics.
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+
 " Manage extensions.
 nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+
 " Show commands.
 nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+
 " Find symbol of current document.
 " nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+
 " Search workspace symbols.
 nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+
 " Do default action for next item.
 nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+
 " Do default action for previous item.
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
 
 
 " Mappings for CoCGit
-" ===================
+
 " navigate chunks of current buffer
 nmap [g <Plug>(coc-git-prevchunk)
 nmap ]g <Plug>(coc-git-nextchunk)
+
 " navigate conflicts of current buffer
-nmap [c <Plug>(coc-git-prevconflict)
-nmap ]c <Plug>(coc-git-nextconflict)
+" nmap [c <Plug>(coc-git-prevconflict)
+" nmap ]c <Plug>(coc-git-nextconflict)
+
 " show chunk diff at current position
 nmap gs <Plug>(coc-git-chunkinfo)
+
 " show commit contains current position
-nmap gc <Plug>(coc-git-commit)
+" nmap gc <Plug>(coc-git-commit)
+
 " create text object for git chunks
 omap ig <Plug>(coc-git-chunk-inner)
 xmap ig <Plug>(coc-git-chunk-inner)
 omap ag <Plug>(coc-git-chunk-outer)
 xmap ag <Plug>(coc-git-chunk-outer)
+
 " If you're not using statusline plugin, you can add them to statusline by
-nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
+" nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
+
 " undo the current chunk
 nmap gu :CocCommand git.chunkUndo<CR>
+
+
+" Calendar.vim
+" ============
+noremap <LEADER>cl :Calendar<CR>
+noremap <LEADER>cc :Calendar -view=clock<CR>
+
 
