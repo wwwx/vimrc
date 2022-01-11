@@ -18,7 +18,8 @@ endif
 " source $HOME/.config/nvim/code/comment.vim
 set rtp+=$HOME/.config/nvim/code/comment
 set rtp+=$HOME/.config/nvim/code/hello
-noremap ghh :Ghh<CR>j
+noremap ghh :CommentHtml<CR>j
+noremap gjj :CommentReact<CR>j
 
 
 exec "nohlsearch"
@@ -86,6 +87,7 @@ map <RIGHT> :vertical resize -5<CR>
 noremap Q  :q<CR>
 noremap W  :w<CR>
 noremap R  :w<CR>:source $MYVIMRC<CR>
+noremap <LEADER>q :qa<CR>
 
 map H ^
 map L $
