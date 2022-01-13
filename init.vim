@@ -78,10 +78,10 @@ map sk :set nosplitbelow<CR>:split<CR>
 map sj :set splitbelow<CR>:split<CR>
 
 " split resize
-map <UP> :resize +5<CR>
-map <DOWN> :resize -5<CR>
-map <LEFT> :vertical resize +5<CR>
-map <RIGHT> :vertical resize -5<CR>
+noremap el :vertical resize -20<CR>
+noremap eh :vertical resize +20<CR>
+noremap ek :resize +20<CR>
+noremap ej :resize -20<CR>
 
 noremap Q  :q<CR>
 noremap W  :w<CR>
