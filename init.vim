@@ -159,6 +159,7 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'RRethy/vim-illuminate' " Highlighting other uses of the current word under the cursor
 Plug 'AndrewRadev/tagalong.vim' " Auto rename HTML tag
 " Plug 'kshenoy/vim-signature'
+Plug 'martinda/Jenkinsfile-vim-syntax'
 
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
