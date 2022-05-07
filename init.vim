@@ -323,8 +323,8 @@ let g:NERDTreeGitStatusShowClean = 1
 let g:NERDTreeShowHidden = 1
 
 " nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-i>     :NERDTreeToggle<CR>
-nnoremap <C-o>     :NERDTreeFind<CR>
+nnoremap <C-t>     :NERDTreeToggle<CR>
+nnoremap <C-y>     :NERDTreeFind<CR>
 noremap  <LEADER>w <C-w>w
 
 
