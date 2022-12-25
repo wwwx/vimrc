@@ -1,4 +1,8 @@
 {
+  "tailwindCSS.trace.server": "verbose",
+  "tailwindCSS.includeLanguages": {
+    "plaintext": "javascript"
+  },
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "scss",
